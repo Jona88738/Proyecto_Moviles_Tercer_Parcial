@@ -42,4 +42,14 @@
         android:name="com.example.proyecto.ui.file.FileFragment"
         android:label="Historial envios"
         tools:layout="@layout/fragment_file" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.proyecto.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/fragment_cupones"
+        android:name="com.example.proyecto.fragment_cupones"
+        android:label="fragment_cupones"
+        tools:layout="@layout/fragment_cupones" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.proyecto.ui.historial;
 
+import android.app.PendingIntent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,11 @@ public class HistorialFragment extends Fragment {
                 cantidad_comida_flautas = 0, cantidad_comida_enchiladas = 0;
     private Double precio_comida_pozole = 0.0, precio_comida_tacos = 0.0, precio_comida_tortas = 0.0,
             precio_comida_flautas = 0.0, precio_comida_enchiladas = 0.0;
+
+    private PendingIntent confirmar;
+    private PendingIntent cancelar;
+    private final static String CHANNEL_ID = "Notificacion";
+    public final static int NOTIFICACION_ID = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = FragmentHistorialBinding.inflate(inflater, container, false);

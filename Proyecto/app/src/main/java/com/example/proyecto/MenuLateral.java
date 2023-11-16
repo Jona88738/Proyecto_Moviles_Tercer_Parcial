@@ -1,5 +1,8 @@
 package com.example.proyecto;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,6 +11,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,6 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyecto.databinding.ActivityMenuLateralBinding;
 
 public class MenuLateral extends AppCompatActivity {
+    private PendingIntent confirmar;
+    private PendingIntent cancelar;
+    private final static String CHANNEL_ID = "Notificacion";
+    public final static int NOTIFICACION_ID = 0;
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuLateralBinding binding;
@@ -76,5 +84,31 @@ public class MenuLateral extends AppCompatActivity {
             startActivity(exit);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //Notificaciones
+    private void setConfirmar() {
+
+        /*
+
+            CONFIGURAR LAS NOTIFICACIONES
+
+         */
+
+    }
+
+    private void setCancelar() {
+
+    }
+
+    private void crearCanalNotificacion() {
+        CharSequence nombre = "Notificaciones";
+        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, nombre, NotificationManager.IMPORTANCE_HIGH);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(notificationChannel);
+    }
+
+    private void crearNotificacion() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
     }
 }

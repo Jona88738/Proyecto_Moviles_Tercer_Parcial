@@ -1,6 +1,5 @@
 package com.example.proyecto.ui.historial;
 
-import android.app.PendingIntent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +16,6 @@ import com.example.proyecto.Carrito;
 import com.example.proyecto.CostruCuenta;
 import com.example.proyecto.MenuLateral;
 import com.example.proyecto.databinding.FragmentHistorialBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HistorialFragment extends Fragment {
 
@@ -36,10 +31,6 @@ public class HistorialFragment extends Fragment {
     private Double precio_comida_pozole = 0.0, precio_comida_tacos = 0.0, precio_comida_tortas = 0.0,
             precio_comida_flautas = 0.0, precio_comida_enchiladas = 0.0;
 
-    private PendingIntent confirmar;
-    private PendingIntent cancelar;
-    private final static String CHANNEL_ID = "Notificacion";
-    public final static int NOTIFICACION_ID = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = FragmentHistorialBinding.inflate(inflater, container, false);
@@ -108,6 +99,7 @@ public class HistorialFragment extends Fragment {
             if(PrecioTotal > costruCuenta.getAumento()){
                 Toast.makeText(getActivity(), "No tienes suficente dinero", Toast.LENGTH_SHORT).show();
             } else {
+                //Mandar a llamar los metodos de la activity Menulateral
                 Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
                 int precTotal = PrecioTotal.intValue();
                 costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
@@ -123,5 +115,4 @@ public class HistorialFragment extends Fragment {
             Toast.makeText(getActivity(), "Por favor fondea tu cuenta", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

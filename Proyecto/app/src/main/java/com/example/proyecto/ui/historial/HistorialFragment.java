@@ -105,7 +105,7 @@ public class HistorialFragment extends Fragment {
             if(PrecioTotal > costruCuenta.getAumento()){
                 Toast.makeText(getActivity(), "No tienes suficente dinero", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
+
                 //Mandar a llamar los metodos de la activity Menulateral
                 //int precTotal = PrecioTotal.intValue();
                 //costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
@@ -124,5 +124,6 @@ public class HistorialFragment extends Fragment {
         txtCantidadTacos.setText("0");      // Mostramos el indicador como 0
         txtCantidadTortas.setText("0");     // Mostramos el indicador como 0
         txtPrecioTotal.setText("0");        // Mostramos el indicador como 0
+        
     }
 }

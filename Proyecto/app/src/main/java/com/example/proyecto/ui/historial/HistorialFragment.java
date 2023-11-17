@@ -20,8 +20,12 @@ import com.example.proyecto.databinding.FragmentHistorialBinding;
 public class HistorialFragment extends Fragment {
 
     private @NonNull FragmentHistorialBinding mViewModel;
-    private TextView txtCantidadEnchiladas, txtCantidadFlautas, txtCantidadPozole,
-            txtCantidadTacos, txtCantidadTortas, txtPrecioTotal;
+    private static TextView txtCantidadEnchiladas;
+    private static TextView txtCantidadFlautas;
+    private static TextView txtCantidadPozole;
+    private static TextView txtCantidadTacos;
+    private static TextView txtCantidadTortas;
+    private static TextView txtPrecioTotal;
     private Button btnPagar;
     private Carrito[] carrito;
     private CostruCuenta costruCuenta;
@@ -95,24 +99,30 @@ public class HistorialFragment extends Fragment {
     }
 
     private void PagarCuenta(Double PrecioTotal) {
+        MenuLateral menuLateral = new MenuLateral();
+
         if(costruCuenta != null){
             if(PrecioTotal > costruCuenta.getAumento()){
                 Toast.makeText(getActivity(), "No tienes suficente dinero", Toast.LENGTH_SHORT).show();
             } else {
-                //Mandar a llamar los metodos de la activity Menulateral
                 Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
-                int precTotal = PrecioTotal.intValue();
-                costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
-                txtCantidadEnchiladas.setText("0"); // Mostramos el indicador como 0
-                txtCantidadFlautas.setText("0");    // Mostramos el indicador como 0
-                txtCantidadPozole.setText("0");     // Mostramos el indicador como 0
-                txtCantidadTacos.setText("0");      // Mostramos el indicador como 0
-                txtCantidadTortas.setText("0");     // Mostramos el indicador como 0
-                txtPrecioTotal.setText("0");        // Mostramos el indicador como 0
-                carrito = null;     // Borramos el arreglo.
+                //Mandar a llamar los metodos de la activity Menulateral
+                //int precTotal = PrecioTotal.intValue();
+                //costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
+                menuLateral.setConfirmar();
+                //carrito = null;     // Borramos el arreglo.
             }
         } else {
             Toast.makeText(getActivity(), "Por favor fondea tu cuenta", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void reiniciarValores() {
+        txtCantidadEnchiladas.setText("0"); // Mostramos el indicador como 0
+        txtCantidadFlautas.setText("0");    // Mostramos el indicador como 0
+        txtCantidadPozole.setText("0");     // Mostramos el indicador como 0
+        txtCantidadTacos.setText("0");      // Mostramos el indicador como 0
+        txtCantidadTortas.setText("0");     // Mostramos el indicador como 0
+        txtPrecioTotal.setText("0");        // Mostramos el indicador como 0
     }
 }

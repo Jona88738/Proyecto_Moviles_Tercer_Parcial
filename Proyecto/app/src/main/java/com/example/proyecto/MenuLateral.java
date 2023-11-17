@@ -8,7 +8,9 @@ import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.proyecto.ui.historial.HistorialFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.app.NotificationCompat;
@@ -87,28 +89,22 @@ public class MenuLateral extends AppCompatActivity {
     }
 
     //Notificaciones
-    private void setConfirmar() {
+    public void setConfirmar() {
+        HistorialFragment.reiniciarValores();
+    }
 
-        /*
-
-            CONFIGURAR LAS NOTIFICACIONES
-
-         */
+    public void setCancelar() {
 
     }
 
-    private void setCancelar() {
-
-    }
-
-    private void crearCanalNotificacion() {
+    public void crearCanalNotificacion() {
         CharSequence nombre = "Notificaciones";
         NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, nombre, NotificationManager.IMPORTANCE_HIGH);
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannel(notificationChannel);
     }
 
-    private void crearNotificacion() {
+    public void crearNotificacion() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
     }
 }

@@ -24,10 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyecto.databinding.ActivityMenuLateralBinding;
 
 public class MenuLateral extends AppCompatActivity {
-    private PendingIntent confirmar;
-    private PendingIntent cancelar;
-    private final static String CHANNEL_ID = "Notificacion";
-    public final static int NOTIFICACION_ID = 0;
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuLateralBinding binding;
@@ -86,25 +82,5 @@ public class MenuLateral extends AppCompatActivity {
             startActivity(exit);
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    //Notificaciones
-    public void setConfirmar() {
-        HistorialFragment.reiniciarValores();
-    }
-
-    public void setCancelar() {
-
-    }
-
-    public void crearCanalNotificacion() {
-        CharSequence nombre = "Notificaciones";
-        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, nombre, NotificationManager.IMPORTANCE_HIGH);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(notificationChannel);
-    }
-
-    public void crearNotificacion() {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
     }
 }

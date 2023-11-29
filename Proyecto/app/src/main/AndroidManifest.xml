@@ -14,7 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Root.usuarios"
+            android:exported="false" />
+        <activity
+            android:name=".Root.MostrarUsuarios"
+            android:exported="false" />
+        <activity
+            android:name=".Root.UsrRoot"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

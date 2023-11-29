@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.proyecto.Clases.Carrito;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;

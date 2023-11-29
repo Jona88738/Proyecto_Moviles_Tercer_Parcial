@@ -24,14 +24,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.proyecto.Carrito;
-import com.example.proyecto.CostruCuenta;
+import com.example.proyecto.Clases.Carrito;
+import com.example.proyecto.Clases.CostruCuenta;
 import com.example.proyecto.MenuLateral;
 import com.example.proyecto.R;
 import com.example.proyecto.databinding.FragmentHistorialBinding;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class HistorialFragment extends Fragment {
 

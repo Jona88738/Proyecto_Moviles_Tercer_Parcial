@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.proyecto.ui.historial.HistorialFragment;
+import com.example.proyecto.Clases.Carrito;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.app.NotificationCompat;

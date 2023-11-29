@@ -32,6 +32,10 @@
             android:id="@+id/fileFragment"
             android:title="Historias Envios"
             android:icon="@drawable/historial_icon"/>
+        <item
+            android:id="@+id/mapsFragment"
+            android:title="Mapa"
+            android:icon="@drawable/historial_icon" />
 
     </group>
 </menu>

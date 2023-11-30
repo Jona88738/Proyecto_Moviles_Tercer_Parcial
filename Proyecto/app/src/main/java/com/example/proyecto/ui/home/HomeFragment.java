@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
                 //FragmentTransaction t = getParentFragmentManager().beginTransaction();
                 //t.replace(R.id.ejemploFrame,new fragment_cupones());
                 FragmentManager man = getParentFragmentManager();
-                /*   man.beginTransaction().replace(R.id.Constraint_hom,new fragment_cupones()).commit();  */
+                man.beginTransaction().replace(R.id.Constraint_hom,new fragment_cupones()).commit();
                 //getParentFragmentManager().beginTransaction().commit();
                 //t.commit();
 

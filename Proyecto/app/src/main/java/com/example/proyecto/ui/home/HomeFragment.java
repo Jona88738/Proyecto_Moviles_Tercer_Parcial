@@ -1,5 +1,6 @@
 package com.example.proyecto.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.proyecto.R;
+import com.example.proyecto.ActivityCupones;
 import com.example.proyecto.databinding.FragmentHomeBinding;
-import com.example.proyecto.fragment_cupones;
 
 public class HomeFragment extends Fragment {
 
@@ -43,11 +42,13 @@ public class HomeFragment extends Fragment {
                 CLprincipal.setVisibility(View.GONE);
                 //FragmentTransaction t = getParentFragmentManager().beginTransaction();
                 //t.replace(R.id.ejemploFrame,new fragment_cupones());
-                FragmentManager man = getParentFragmentManager();
-                man.beginTransaction().replace(R.id.Constraint_hom,new fragment_cupones()).commit();
+                //FragmentManager man = getParentFragmentManager();
+                //man.beginTransaction().replace(R.id.Constraint_hom,new fragment_cupones()).commit();
                 //getParentFragmentManager().beginTransaction().commit();
                 //t.commit();
 
+                Intent intent = new Intent(getActivity(), ActivityCupones.class);
+                startActivity(intent);
             }
         });
 

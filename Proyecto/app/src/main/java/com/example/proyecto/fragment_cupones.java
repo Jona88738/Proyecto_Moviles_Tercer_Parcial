@@ -24,6 +24,8 @@ public class fragment_cupones extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+
     public fragment_cupones() {
         // Required empty public constructor
     }
@@ -61,4 +63,6 @@ public class fragment_cupones extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cupones, container, false);
     }
+
+
 }

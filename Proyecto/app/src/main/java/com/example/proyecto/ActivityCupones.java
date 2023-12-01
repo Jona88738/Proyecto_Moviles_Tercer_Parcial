@@ -14,7 +14,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class ActivityCupones extends AppCompatActivity {
 
-    public static int Descuento = 100;
+    public static int Descuento = 0;
     public static boolean isValido = false;
     private TextView codigo;
     @Override
@@ -58,6 +58,7 @@ public class ActivityCupones extends AppCompatActivity {
             Toast.makeText(this, "Se necesita leer un codigo", Toast.LENGTH_SHORT).show();
         } else {
             isValido = true;
+            Descuento = 100;
             Toast.makeText(this, "El cupon se ha validado exitosamente", Toast.LENGTH_SHORT).show();
         }
     }

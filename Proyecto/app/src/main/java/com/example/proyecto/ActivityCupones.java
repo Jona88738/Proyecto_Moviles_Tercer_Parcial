@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -14,13 +15,14 @@ import com.google.zxing.integration.android.IntentResult;
 public class ActivityCupones extends AppCompatActivity {
 
     public static int Descuento = 100;
-    private EditText codigo;
+    public static boolean isValido = false;
+    private TextView codigo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cupones);
 
-        codigo = findViewById(R.id.edtCodigo);
+        codigo = findViewById(R.id.txtCupon);
     }
 
     public void escanear(View view) {
@@ -48,6 +50,15 @@ public class ActivityCupones extends AppCompatActivity {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    public void validarCupon(View view) {
+        if(codigo.getText().toString().equals("")) {
+            Toast.makeText(this, "Se necesita leer un codigo", Toast.LENGTH_SHORT).show();
+        } else {
+            isValido = true;
+            Toast.makeText(this, "El cupon se ha validado exitosamente", Toast.LENGTH_SHORT).show();
         }
     }
 }

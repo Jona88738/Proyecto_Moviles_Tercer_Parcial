@@ -6,24 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ActivityCupones">
 
-    <EditText
-        android:id="@+id/edtCodigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="216dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Code"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button9"
         android:layout_width="234dp"
         android:layout_height="47dp"
         android:layout_marginStart="88dp"
         android:layout_marginTop="316dp"
+        android:onClick="escanear"
         android:text="Scann"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,8 +23,19 @@
         android:layout_height="51dp"
         android:layout_marginStart="88dp"
         android:layout_marginBottom="304dp"
-        android:onClick="regresar"
+        android:onClick="validarCupon"
         android:text="Validate cupon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCupon"
+        android:layout_width="142dp"
+        android:layout_height="32dp"
+        android:hint="Scann cupon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
 </androidx.constraintlayout.widget.ConstraintLayout>

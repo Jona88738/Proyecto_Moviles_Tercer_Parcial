@@ -7,7 +7,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -132,19 +131,20 @@ public class HistorialFragment extends Fragment {
                 crearNotificacion();
                 if(pagarCuenta) {
                     if(ActivityCupones.isValido) {
-
-
                         int precTotal = PrecioTotal.intValue();
                         costruCuenta.setAumento(costruCuenta.getAumento() - (precTotal - ActivityCupones.Descuento));
+                        reiniciarValores();
                         Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
                         carrito = null;     // Borramos el arreglo.
                     } else {
                         int precTotal = PrecioTotal.intValue();
                         costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
+                        reiniciarValores();
                         Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
                         carrito = null;     // Borramos el arreglo.
                     }
                 } else {
+                    reiniciarValores();
                     carrito = null;
                 }
             }
@@ -155,15 +155,22 @@ public class HistorialFragment extends Fragment {
 
     //Notificaciones
     private void setConfirmar() {
-        intentConfirmar = new Intent();
-        intentConfirmar.setAction("CONFIRMAR");
-        confirmar = PendingIntent.getActivity(requireActivity().getApplicationContext(), 0 , intentConfirmar, PendingIntent.FLAG_UPDATE_CURRENT);
+
+       /*
+
+            Checar bien la confirmacion
+
+        */
+
     }
 
     private void setCancelar() {
-        intentCancelar = new Intent();
-        intentCancelar.setAction("CANCELAR");
-        cancelar = PendingIntent.getActivity(requireActivity().getApplicationContext(), 0 , intentCancelar, PendingIntent.FLAG_UPDATE_CURRENT);
+       /*
+
+            Checar bien la cancelacion
+
+        */
+
     }
 
     public void crearCanalNotificacion() {

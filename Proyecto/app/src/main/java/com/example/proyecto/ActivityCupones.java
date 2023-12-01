@@ -58,8 +58,9 @@ public class ActivityCupones extends AppCompatActivity {
             Toast.makeText(this, "Se necesita leer un codigo", Toast.LENGTH_SHORT).show();
         } else {
             isValido = true;
-            Descuento = 100;
             Toast.makeText(this, "El cupon se ha validado exitosamente", Toast.LENGTH_SHORT).show();
+            isValido = true;
+            Descuento = 100;
         }
     }
 }

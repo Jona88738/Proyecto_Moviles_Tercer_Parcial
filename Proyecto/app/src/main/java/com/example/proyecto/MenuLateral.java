@@ -78,4 +78,15 @@ public class MenuLateral extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void miMetodo(){
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+miMetodo();
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

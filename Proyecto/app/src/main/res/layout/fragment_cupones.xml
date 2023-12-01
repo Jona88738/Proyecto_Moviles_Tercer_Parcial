@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnScan"
             android:layout_width="234dp"
             android:layout_height="47dp"
             android:layout_marginStart="88dp"

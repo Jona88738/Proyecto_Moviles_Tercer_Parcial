@@ -75,9 +75,9 @@ public class fragment_cupones extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                IntentIntegrator intentIntegrator = new
-                        IntentIntegrator();
+    /*
+                IntentIntegrator intentIntegrator = //new
+                 //       IntentIntegrator();
                 intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
 
                 intentIntegrator.setPrompt("Lector - xD");
@@ -86,7 +86,9 @@ public class fragment_cupones extends Fragment {
                 intentIntegrator.setBarcodeImageEnabled(true);
                 intentIntegrator.initiateScan();
 
-                get
+
+     */
+
             }
         });
 

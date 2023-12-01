@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.proyecto.Clases.Usuario;
 import com.example.proyecto.Root.UsrRoot;
@@ -20,6 +21,8 @@ import com.example.proyecto.db.db_queryUsuario;
 
 public class MainActivity extends AppCompatActivity {
     private EditText email, contrasena;
+
+    ToggleButton btnMusica;
 
 
     @Override
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         SQLiteDatabase db = dbHel.getWritableDatabase();
 
+
+      /// btnMusica = findViewById(R.id.tbMusica);
+       // btnMusica.setChecked(false);
 
     }
 

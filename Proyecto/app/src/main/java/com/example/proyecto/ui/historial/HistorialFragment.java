@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyecto.ActivityCupones;
 import com.example.proyecto.Clases.Carrito;
 import com.example.proyecto.Clases.CostruCuenta;
 import com.example.proyecto.MenuLateral;
@@ -47,6 +48,9 @@ public class HistorialFragment extends Fragment {
                 cantidad_comida_flautas = 0, cantidad_comida_enchiladas = 0;
     private Double precio_comida_pozole = 0.0, precio_comida_tacos = 0.0, precio_comida_tortas = 0.0,
             precio_comida_flautas = 0.0, precio_comida_enchiladas = 0.0;
+
+    Intent intentConfirmar;
+    Intent intentCancelar;
     private PendingIntent confirmar;
     private PendingIntent cancelar;
     private final static String CHANNEL_ID = "Notificacion";
@@ -127,9 +131,19 @@ public class HistorialFragment extends Fragment {
                 crearCanalNotificacion();
                 crearNotificacion();
                 if(pagarCuenta) {
-                    int precTotal = PrecioTotal.intValue();
-                    costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
-                    carrito = null;     // Borramos el arreglo.
+                    if(ActivityCupones.isValido) {
+
+
+                        int precTotal = PrecioTotal.intValue();
+                        costruCuenta.setAumento(costruCuenta.getAumento() - (precTotal - ActivityCupones.Descuento));
+                        Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
+                        carrito = null;     // Borramos el arreglo.
+                    } else {
+                        int precTotal = PrecioTotal.intValue();
+                        costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
+                        Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
+                        carrito = null;     // Borramos el arreglo.
+                    }
                 } else {
                     carrito = null;
                 }
@@ -141,19 +155,15 @@ public class HistorialFragment extends Fragment {
 
     //Notificaciones
     private void setConfirmar() {
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(requireActivity().getApplicationContext());
-        stackBuilder.addParentStack(MenuLateral.class);
-        //confirmar = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_CANCEL_CURRENT);
-        reiniciarValores();
-        pagarCuenta = true;
+        intentConfirmar = new Intent();
+        intentConfirmar.setAction("CONFIRMAR");
+        confirmar = PendingIntent.getActivity(requireActivity().getApplicationContext(), 0 , intentConfirmar, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private void setCancelar() {
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(requireActivity().getApplicationContext());
-        stackBuilder.addParentStack(MenuLateral.class);
-        //cancelar = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_CANCEL_CURRENT);
-        reiniciarValores();
-        pagarCuenta = false;
+        intentCancelar = new Intent();
+        intentCancelar.setAction("CANCELAR");
+        cancelar = PendingIntent.getActivity(requireActivity().getApplicationContext(), 0 , intentCancelar, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     public void crearCanalNotificacion() {
@@ -187,6 +197,5 @@ public class HistorialFragment extends Fragment {
         txtCantidadTacos.setText("0");      // Mostramos el indicador como 0
         txtCantidadTortas.setText("0");     // Mostramos el indicador como 0
         txtPrecioTotal.setText("0");        // Mostramos el indicador como 0
-        Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
     }
 }

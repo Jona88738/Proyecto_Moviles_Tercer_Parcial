@@ -1,14 +1,20 @@
 package com.example.proyecto;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.proyecto.ui.historial.HistorialFragment;
 import com.example.proyecto.Clases.Carrito;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;

@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        OrdenaYa = binding.btnOrdenaYa;
+      //  OrdenaYa = binding.btnOrdenaYa;
 
         Cupones =binding.btnCupones;
         CLprincipal = binding.CLFragmentHom;
@@ -53,10 +53,11 @@ public class HomeFragment extends Fragment {
         });
 
         View root = binding.getRoot();
-        OrdenaYa.setOnClickListener(v -> {
+       /* OrdenaYa.setOnClickListener(v -> {
             Toast.makeText(getActivity(), "COMIDA TIPICA MEXICANA, ORDENA YA!", Toast.LENGTH_SHORT).show();
-        });
+        });*/
         return root;
+
     }
 
     @Override

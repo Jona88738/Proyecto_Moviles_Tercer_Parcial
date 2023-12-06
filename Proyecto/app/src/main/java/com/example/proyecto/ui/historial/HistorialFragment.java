@@ -1,7 +1,9 @@
 package com.example.proyecto.ui.historial;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
+import static android.icu.text.ListFormatter.Type.OR;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -24,8 +26,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.proyecto.ActivityCupones;
+import com.example.proyecto.Clases.BtnNoti;
 import com.example.proyecto.Clases.Carrito;
 import com.example.proyecto.Clases.CostruCuenta;
+import com.example.proyecto.MainActivity;
 import com.example.proyecto.MenuLateral;
 import com.example.proyecto.R;
 import com.example.proyecto.databinding.FragmentHistorialBinding;
@@ -41,7 +45,7 @@ public class HistorialFragment extends Fragment {
     private TextView txtPrecioTotal;
     private Button btnPagar;
     private Carrito[] carrito;
-    private CostruCuenta costruCuenta;
+    public static CostruCuenta costruCuenta;
     private Double cantidad_total = 0.0;
     private int cantidad_comida_pozole = 0, cantidad_comida_tacos = 0, cantidad_comida_tortas = 0,
                 cantidad_comida_flautas = 0, cantidad_comida_enchiladas = 0;
@@ -53,8 +57,9 @@ public class HistorialFragment extends Fragment {
     private PendingIntent confirmar;
     private PendingIntent cancelar;
     private final static String CHANNEL_ID = "Notificacion";
-    public final static int NOTIFICACION_ID = 0;
+    public  static int NOTIFICACION_ID = 0;
 
+    public  static int opcion = 0;
     private boolean pagarCuenta = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -119,31 +124,42 @@ public class HistorialFragment extends Fragment {
         return root;
     }
 
+    public static int precTotal;
     private void PagarCuenta(Double PrecioTotal) {
 
         if(costruCuenta != null){
             if(PrecioTotal > costruCuenta.getAumento()){
                 Toast.makeText(getActivity(), "No tienes suficente dinero", Toast.LENGTH_SHORT).show();
             } else {
+
                 setConfirmar();
                 setCancelar();
                 crearCanalNotificacion();
                 crearNotificacion();
                 if(pagarCuenta) {
+
                     if(ActivityCupones.isValido) {
-                        int precTotal = PrecioTotal.intValue();
+                       // int precTotal = PrecioTotal.intValue();
+                         precTotal = PrecioTotal.intValue();
+
                         costruCuenta.setAumento(costruCuenta.getAumento() - (precTotal - ActivityCupones.Descuento));
                         reiniciarValores();
                         Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
                         carrito = null;     // Borramos el arreglo.
                     } else {
-                        int precTotal = PrecioTotal.intValue();
+                        //int precTotal = PrecioTotal.intValue();
+                         precTotal = PrecioTotal.intValue();
+
                         costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
                         reiniciarValores();
                         Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
                         carrito = null;     // Borramos el arreglo.
                     }
                 } else {
+                    precTotal = PrecioTotal.intValue();
+
+                    Toast.makeText(getActivity(),"reinicio",Toast.LENGTH_LONG).show();
+
                     reiniciarValores();
                     carrito = null;
                 }
@@ -154,7 +170,20 @@ public class HistorialFragment extends Fragment {
     }
 
     //Notificaciones
+    PendingIntent pendingintentSi,Aux2;
     private void setConfirmar() {
+
+        Intent intent = new Intent(getActivity(), BtnNoti.class);
+
+        intent.setAction("ACTION_BUTTON_1");
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+        stackBuilder.addParentStack(getActivity());
+        stackBuilder.addNextIntent(intent);
+
+       //pendingintentSi = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_IMMUTABLE);
+        Aux2 = PendingIntent.getBroadcast(getActivity(),0,intent, PendingIntent.FLAG_IMMUTABLE );// stackBuilder.getPendingIntent(1, PendingIntent.FLAG_IMMUTABLE);
+
 
        /*
 
@@ -162,15 +191,28 @@ public class HistorialFragment extends Fragment {
 
         */
 
+        opcion = 1;
     }
 
+    PendingIntent pendingIntentNO,Aux;
+
     private void setCancelar() {
-       /*
 
-            Checar bien la cancelacion
+        Intent intent2 = new Intent(getActivity(), BtnNoti.class);
 
-        */
+        intent2.setAction("ACTION_BUTTON_2");
 
+        Aux = PendingIntent.getBroadcast(getActivity(),0,intent2, PendingIntent.FLAG_IMMUTABLE);// stackBuilder.getPendingIntent(1, PendingIntent.FLAG_IMMUTABLE);
+
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getActivity());
+        stackBuilder.addParentStack(getActivity());
+        stackBuilder.addNextIntent(intent2);
+
+        //pendingIntentNO = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_IMMUTABLE);
+
+       // .getBroadcast
+        opcion = 2;
     }
 
     public void crearCanalNotificacion() {
@@ -191,11 +233,13 @@ public class HistorialFragment extends Fragment {
         builder.setDefaults(Notification.DEFAULT_SOUND);
 
 
-        builder.addAction(R.drawable.logo, "Confirmar", confirmar);
-        builder.addAction(R.drawable.logo, "Cancelar", cancelar);
+        builder.addAction(R.drawable.logo, "Confirmar",Aux2);
+        builder.addAction(R.drawable.logo, "Cancelar",Aux);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(requireActivity().getApplicationContext());
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+
+
     }
     private void reiniciarValores() {
         txtCantidadEnchiladas.setText("0"); // Mostramos el indicador como 0

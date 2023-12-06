@@ -23,7 +23,7 @@ public class HomeFragment extends Fragment {
     private Button OrdenaYa;
     private Button Cupones;
 
-    private ConstraintLayout CLprincipal;
+    public static ConstraintLayout CLprincipal;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment {
 
         Cupones =binding.btnCupones;
         CLprincipal = binding.CLFragmentHom;
+
         Cupones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

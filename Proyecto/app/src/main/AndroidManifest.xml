@@ -80,6 +80,18 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".Clases.BtnNoti"
+            android:exported="false">
+            <!-- Aquí puedes agregar filtros de intención si es necesario -->
+            <intent-filter>
+                <action android:name="ACTION_BUTTON_2" />
+                <action android:name="ACTION_BUTTON_1" />
+                <!-- La misma acción que configuras en tu PendingIntent -->
+                <!-- Puedes agregar más acciones si tu BroadcastReceiver maneja múltiples acciones -->
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

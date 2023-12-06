@@ -6,15 +6,21 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.proyecto.Clases.BtnNoti;
 import com.example.proyecto.ui.historial.HistorialFragment;
 import com.example.proyecto.Clases.Carrito;
+import com.example.proyecto.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -24,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyecto.databinding.ActivityMenuLateralBinding;
 
-public class MenuLateral extends AppCompatActivity {
+public class MenuLateral extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuLateralBinding binding;
@@ -59,6 +65,36 @@ public class MenuLateral extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu_lateral);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        if(BtnNoti.puerta  == 2){
+
+            //Toast.makeText(this,"XD",Toast.LENGTH_LONG).show();
+            notificationManagerCompat.cancel(HistorialFragment.NOTIFICACION_ID);
+
+            FragmentTransaction t = getSupportFragmentManager().beginTransaction(); // getParentFragmentManager().beginTransaction();
+            t.replace(R.id.Constraint_hom,new HistorialFragment());
+            t.commit();
+
+            HomeFragment.CLprincipal.setVisibility(View.GONE);
+
+            Toast.makeText(this,"Realizo su compra",Toast.LENGTH_LONG).show();
+            notificationManagerCompat.cancel(HistorialFragment.NOTIFICACION_ID);
+
+            HistorialFragment.costruCuenta.setAumento(HistorialFragment.costruCuenta.getAumento() - HistorialFragment.precTotal-ActivityCupones.Descuento);
+
+           // Toast.makeText(this,"vacio",Toast.LENGTH_LONG).show();
+        }else if(BtnNoti.puerta == 3){
+
+            Toast.makeText(this,"Su compra fue cancelada",Toast.LENGTH_LONG).show();
+            notificationManagerCompat.cancel(HistorialFragment.NOTIFICACION_ID);
+
+             HistorialFragment.NOTIFICACION_ID = 0;
+
+        }
+
+
     }
 
     @Override
@@ -89,10 +125,15 @@ public class MenuLateral extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-miMetodo();
 
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+
+
+   public void onDestroy() {
+       Toast.makeText(this,"Murio",Toast.LENGTH_LONG).show();
+
+       Log.d("Murio", "xD");
+
+       super.onDestroy();
+   }
+
 }

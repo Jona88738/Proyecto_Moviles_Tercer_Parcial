@@ -7,7 +7,8 @@ import android.os.Bundle;
 import com.example.proyecto.ui.historial.HistorialFragment;
 
 public class HistorialActivity extends AppCompatActivity {
-/*
+
+/* Borrar xD
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -21,7 +21,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.proyecto.CostruEnvio;
+import com.example.proyecto.Clases.CostruEnvio;
 import com.example.proyecto.R;
 
 import java.io.IOException;

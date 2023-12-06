@@ -1,31 +1,44 @@
 package com.example.proyecto.ui.historial;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.proyecto.Carrito;
-import com.example.proyecto.CostruCuenta;
+import com.example.proyecto.ActivityCupones;
+import com.example.proyecto.Clases.Carrito;
+import com.example.proyecto.Clases.CostruCuenta;
 import com.example.proyecto.MenuLateral;
+import com.example.proyecto.R;
 import com.example.proyecto.databinding.FragmentHistorialBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HistorialFragment extends Fragment {
 
     private @NonNull FragmentHistorialBinding mViewModel;
-    private TextView txtCantidadEnchiladas, txtCantidadFlautas, txtCantidadPozole,
-            txtCantidadTacos, txtCantidadTortas, txtPrecioTotal;
+    private TextView txtCantidadEnchiladas;
+    private TextView txtCantidadFlautas;
+    private TextView txtCantidadPozole;
+    private TextView txtCantidadTacos;
+    private TextView txtCantidadTortas;
+    private TextView txtPrecioTotal;
     private Button btnPagar;
     private Carrito[] carrito;
     private CostruCuenta costruCuenta;
@@ -34,6 +47,15 @@ public class HistorialFragment extends Fragment {
                 cantidad_comida_flautas = 0, cantidad_comida_enchiladas = 0;
     private Double precio_comida_pozole = 0.0, precio_comida_tacos = 0.0, precio_comida_tortas = 0.0,
             precio_comida_flautas = 0.0, precio_comida_enchiladas = 0.0;
+
+    Intent intentConfirmar;
+    Intent intentCancelar;
+    private PendingIntent confirmar;
+    private PendingIntent cancelar;
+    private final static String CHANNEL_ID = "Notificacion";
+    public final static int NOTIFICACION_ID = 0;
+
+    private boolean pagarCuenta = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = FragmentHistorialBinding.inflate(inflater, container, false);
@@ -98,24 +120,89 @@ public class HistorialFragment extends Fragment {
     }
 
     private void PagarCuenta(Double PrecioTotal) {
+
         if(costruCuenta != null){
             if(PrecioTotal > costruCuenta.getAumento()){
                 Toast.makeText(getActivity(), "No tienes suficente dinero", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
-                int precTotal = PrecioTotal.intValue();
-                costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
-                txtCantidadEnchiladas.setText("0"); // Mostramos el indicador como 0
-                txtCantidadFlautas.setText("0");    // Mostramos el indicador como 0
-                txtCantidadPozole.setText("0");     // Mostramos el indicador como 0
-                txtCantidadTacos.setText("0");      // Mostramos el indicador como 0
-                txtCantidadTortas.setText("0");     // Mostramos el indicador como 0
-                txtPrecioTotal.setText("0");        // Mostramos el indicador como 0
-                carrito = null;     // Borramos el arreglo.
+                setConfirmar();
+                setCancelar();
+                crearCanalNotificacion();
+                crearNotificacion();
+                if(pagarCuenta) {
+                    if(ActivityCupones.isValido) {
+                        int precTotal = PrecioTotal.intValue();
+                        costruCuenta.setAumento(costruCuenta.getAumento() - (precTotal - ActivityCupones.Descuento));
+                        reiniciarValores();
+                        Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
+                        carrito = null;     // Borramos el arreglo.
+                    } else {
+                        int precTotal = PrecioTotal.intValue();
+                        costruCuenta.setAumento(costruCuenta.getAumento() - precTotal);
+                        reiniciarValores();
+                        Toast.makeText(getActivity(), "Gracias por tu compra!", Toast.LENGTH_SHORT).show();
+                        carrito = null;     // Borramos el arreglo.
+                    }
+                } else {
+                    reiniciarValores();
+                    carrito = null;
+                }
             }
         } else {
             Toast.makeText(getActivity(), "Por favor fondea tu cuenta", Toast.LENGTH_SHORT).show();
         }
     }
 
+    //Notificaciones
+    private void setConfirmar() {
+
+       /*
+
+            Checar bien la confirmacion
+
+        */
+
+    }
+
+    private void setCancelar() {
+       /*
+
+            Checar bien la cancelacion
+
+        */
+
+    }
+
+    public void crearCanalNotificacion() {
+        CharSequence nombre = "Notificaciones";
+        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, nombre, NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager notificationManager = (NotificationManager) requireActivity().getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(notificationChannel);
+    }
+
+    public void crearNotificacion() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(requireActivity().getApplicationContext(), CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.logo);
+        builder.setContentTitle("¡Order");
+        builder.setContentText("¿Deseas confirmar tu cuenta?");
+        builder.setColor(Color.BLUE);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setVibrate(new long[]{50,50,50,50,50});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+
+        builder.addAction(R.drawable.logo, "Confirmar", confirmar);
+        builder.addAction(R.drawable.logo, "Cancelar", cancelar);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(requireActivity().getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+    }
+    private void reiniciarValores() {
+        txtCantidadEnchiladas.setText("0"); // Mostramos el indicador como 0
+        txtCantidadFlautas.setText("0");    // Mostramos el indicador como 0
+        txtCantidadPozole.setText("0");     // Mostramos el indicador como 0
+        txtCantidadTacos.setText("0");      // Mostramos el indicador como 0
+        txtCantidadTortas.setText("0");     // Mostramos el indicador como 0
+        txtPrecioTotal.setText("0");        // Mostramos el indicador como 0
+    }
 }

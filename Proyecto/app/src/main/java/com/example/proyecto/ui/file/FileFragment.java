@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.proyecto.CostruEnvio;
+import com.example.proyecto.Clases.CostruEnvio;
 import com.example.proyecto.R;
 
 import java.io.BufferedReader;

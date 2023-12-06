@@ -80,13 +80,13 @@
         android:layout_width="317dp"
         android:layout_height="41dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="89dp"
         android:fontFamily="@font/poppins_medium"
         android:onClick="Editar"
         android:text="Editar"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etpassBusEncontra2" />
+        app:layout_constraintTop_toBottomOf="@+id/etpassBusEncontra" />
 
     <Button
         android:id="@+id/button7"
@@ -127,19 +127,6 @@
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmailBusEncontr" />
-
-    <EditText
-        android:id="@+id/etpassBusEncontra2"
-        style="@style/InputGrey"
-        android:layout_width="328dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Level"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etpassBusEncontra" />
 
     <EditText
         android:id="@+id/etEmailBusEncontr"

@@ -29,12 +29,12 @@
           style="@style/MiEstiloDeBoton"
           android:layout_width="379dp"
           android:layout_height="53dp"
-          android:layout_marginStart="16dp"
           android:layout_marginBottom="232dp"
           android:fontFamily="@font/poppins_medium"
           android:text="Cupones"
           android:textSize="20sp"
           app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent" />
 
       <TextView

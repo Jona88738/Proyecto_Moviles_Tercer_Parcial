@@ -23,6 +23,7 @@ public class ActivityCupones extends AppCompatActivity {
         setContentView(R.layout.activity_cupones);
 
         codigo = findViewById(R.id.txtCupon);
+        MenuLateral.regre2 = 1;
     }
 
     public void escanear(View view) {

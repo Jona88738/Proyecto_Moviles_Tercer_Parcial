@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         Cupones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CLprincipal.setVisibility(View.GONE);
+                //CLprincipal.setVisibility(View.GONE);
                 //FragmentTransaction t = getParentFragmentManager().beginTransaction();
                 //t.replace(R.id.ejemploFrame,new fragment_cupones());
                 //FragmentManager man = getParentFragmentManager();

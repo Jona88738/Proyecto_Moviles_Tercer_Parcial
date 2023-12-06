@@ -37,6 +37,8 @@ public class MenuLateral extends AppCompatActivity  {
 
     private Carrito[] carrito;
 
+    public  static int regre2 = 0;
+
     public Carrito[] getCarrito() {
         return carrito;
     }
@@ -91,6 +93,16 @@ public class MenuLateral extends AppCompatActivity  {
             notificationManagerCompat.cancel(HistorialFragment.NOTIFICACION_ID);
 
              HistorialFragment.NOTIFICACION_ID = 0;
+
+        }
+
+        if(regre2 == 1) {
+
+
+            FragmentTransaction t = getSupportFragmentManager().beginTransaction(); // getParentFragmentManager().beginTransaction();
+            t.replace(R.id.Constraint_hom,new HomeFragment());
+            t.commit();
+            HomeFragment.CLprincipal.setVisibility(View.VISIBLE);
 
         }
 
